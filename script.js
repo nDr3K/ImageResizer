@@ -11,6 +11,8 @@ const sizeInputHolder = document.getElementById('size-input-holder');
 const croppedImageHolder = document.getElementById('cropped-image-holder');
 const croppedImagePreviews = document.getElementById('cropped-image-previews');
 const downloadButton = document.getElementById('download-button');
+const subTitleH2 = document.querySelector('#page-title h2');
+const subTitleP = document.querySelector('#page-title p');
 
 const croppedImage = new Image();
 let isDragging = false;
@@ -77,7 +79,9 @@ fileInput.addEventListener('change', () => {
 });
 
 function handleFile(file) {
+    clearData();
     if (file && file.type.startsWith('image/')) {
+        console.log(file)
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -95,8 +99,14 @@ function handleFile(file) {
                 uploadedImage.src = img.src;
                 uploadedImage.width = newWidth;
                 uploadedImage.height = newHeight;
+                imageHolder.style.display = 'flex';
+                blueSquare.style.display = 'block';
                 uploadedImage.style.display = 'block';
+                dropZone.style.display = 'none';
                 cropButton.style.display = 'block';
+                subTitleH2.style.display = 'none';
+                subTitleP.style.display = 'none';
+                croppedImagePreviews.style.display = 'none';
 
                 const imageSize = Math.min(newWidth, newHeight);
 
@@ -137,7 +147,6 @@ cropButton.addEventListener('click', () => {
     croppedImage.src = croppedImageDataUrl;
     blueSquare.style.display = 'none';
     cropButton.style.display = 'none';
-    dropZone.style.display = 'none';
     addSizeInputButton.style.display = 'block'
     resizeButton.style.display = 'block'
 
@@ -153,7 +162,7 @@ addSizeInputButton.addEventListener('click', () => {
 function createInputSizeElement() {
     const sizeInput = document.createElement('input');
     sizeInput.type = 'number';
-    sizeInput.placeholder = 'Enter size:';
+    sizeInput.placeholder = 'Enter size (ex. 32):';
     sizeInput.min = 1;
     resizeContainer.appendChild(sizeInput);
 }
@@ -188,6 +197,8 @@ resizeButton.addEventListener('click', () => {
     });
 
     imageHolder.style.display = 'none';
+    addSizeInputButton.style.display = 'none'
+    resizeButton.style.display = 'none'
     croppedImagePreviews.style.display = 'flex';
     resizedImages.forEach(resizedImage => {
         croppedImageHolder.appendChild(resizedImage);
@@ -228,4 +239,19 @@ downloadButton.addEventListener('click', async () => {
 
     downloadLink.click();
     downloadLink.remove();
+
+    subTitleH2.style.display = 'block';
+    subTitleP.style.display = 'block';
+    dropZone.style.display = 'block';
+    croppedImage.parentElement.replaceChild(uploadedImage, croppedImage);
 });
+
+function clearData() {
+    while (croppedImageHolder.firstChild) {
+        croppedImageHolder.removeChild(croppedImageHolder.firstChild);
+    }
+
+    while (resizeContainer.firstChild) {
+        resizeContainer.removeChild(resizeContainer.firstChild);
+    }
+}

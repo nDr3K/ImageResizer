@@ -1,11 +1,17 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f3f3f3;
+}
+
+#page-title {
+    margin: 20px auto;
+    text-align: center;
 }
 
 #drop-zone {
     width: 50vh;
-    margin: 20px auto 0px auto;
+    margin: 40px auto 0px auto;
     border: 2px dashed #cdcdcd;
     padding: 20px;
     text-align: center;
@@ -44,8 +50,8 @@ button {
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: 500;
-    color: #000;
-    background-color: #fff;
+    color: #000000;
+    background-color: #ffffff;
     border: none;
     border-radius: 45px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -57,7 +63,7 @@ button {
 button:hover {
     background-color: #ade8f4;
     box-shadow: 0px 15px 20px rgba(2, 62, 138, 0.4);
-    color: #fff;
+    color: #ffffff;
     transform: translateY(-7px);
 }
 
@@ -100,4 +106,29 @@ button:hover {
     gap: 30px;
     justify-content: space-evenly;
     align-items: first baseline;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    border: 1px solid #cdcdcd;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); 
+    padding: 10px; 
+    border-radius: 5px;
+    font-size: 14px;
+    width: 60%;
+    text-align: center;
+}
+
+#page-title h2 {
+    display: none;
+}
+
+#page-title p {
+    display: none;
 }
