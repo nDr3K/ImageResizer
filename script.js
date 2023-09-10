@@ -14,40 +14,31 @@ const downloadButton = document.getElementById('download-button');
 
 const croppedImage = new Image();
 let isDragging = false;
-let initialX, initialY, currentX, currentY;
+let initialX, initialY, offsetX, offsetY, maxX, maxY;
 
 blueSquare.addEventListener('mousedown', (e) => {
     isDragging = true;
     blueSquare.style.cursor = 'grabbing';
-    initialX = e.clientX - blueSquare.getBoundingClientRect().left;
-    initialY = e.clientY - blueSquare.getBoundingClientRect().top;
+    initialX = e.clientX;
+    initialY = e.clientY;
+    offsetX = blueSquare.offsetLeft;
+    offsetY = blueSquare.offsetTop;
+    maxX = blueSquare.parentElement.clientWidth - blueSquare.clientWidth;
+    maxY = blueSquare.parentElement.clientHeight - blueSquare.clientHeight;
 });
 
 document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
 
-    e.preventDefault();
+    const newX = offsetX + (e.clientX - initialX);
+    const newY = offsetY + (e.clientY - initialY);
 
-    currentX = e.clientX - initialX;
-    currentY = e.clientY - initialY;
-
-    const maxX = blueSquare.parentElement.clientWidth - blueSquare.clientWidth;
-    const maxY = blueSquare.parentElement.clientHeight - blueSquare.clientHeight;
-
-
-    currentX = Math.max(currentX, 0);
-    currentY = Math.max(currentY, 0);
-    if (currentY < maxY) {
-        blueSquare.style.top = currentY + 'px';
+    if (newX >= 0 && newX <= maxX) {
+        blueSquare.style.left = newX + 'px';
     }
-    else {
-        blueSquare.style.top = maxY + 'px';
-    }
-    if (currentX < maxX) {
-        blueSquare.style.left = currentX + 'px';
-    }
-    else {
-        blueSquare.style.left = maxX + 'px';
+
+    if (newY >= 0 && newY <= maxY) {
+        blueSquare.style.top = newY + 'px';
     }
 });
 
