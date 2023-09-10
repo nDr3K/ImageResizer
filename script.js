@@ -17,6 +17,7 @@ const subTitleP = document.querySelector('#page-title p');
 const croppedImage = new Image();
 let isDragging = false;
 let initialX, initialY, offsetX, offsetY, maxX, maxY;
+let fileName = 'image';
 
 blueSquare.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -81,7 +82,7 @@ fileInput.addEventListener('change', () => {
 function handleFile(file) {
     clearData();
     if (file && file.type.startsWith('image/')) {
-        console.log(file)
+        fileName = file.name.replace(/\.[^/.]+$/, "");
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -210,10 +211,12 @@ downloadButton.addEventListener('click', async () => {
     const imageElements = croppedImageHolder.querySelectorAll('img');
 
     const urls = [];
+    const sizes = [];
 
     imageElements.forEach((image) => {
-        const imageSrc = image.src;
-        urls.push(imageSrc);
+        console.log(image)
+        sizes.push(image.alt);
+        urls.push(image.src);
     });
 
     const promises = urls.map(async (url) => {
@@ -227,7 +230,7 @@ downloadButton.addEventListener('click', async () => {
     const zip = new JSZip();
 
     res.forEach((blob, index) => {
-        zip.file(`image_${index + 1}.png`, blob);
+        zip.file(`${fileName}_${sizes[index].replace('Resized Image ','')}.png`, blob);
     });
 
     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -243,7 +246,8 @@ downloadButton.addEventListener('click', async () => {
     subTitleH2.style.display = 'block';
     subTitleP.style.display = 'block';
     dropZone.style.display = 'block';
-        croppedImage.parentElement.replaceChild(uploadedImage, croppedImage);
+    croppedImage.parentElement.replaceChild(uploadedImage, croppedImage);
+    fileName = 'image';
 });
 
 function clearData() {
