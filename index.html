@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div id="drop-zone">
+        <p>Drag and drop an image here</p>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+    <div id="image-holder">
+        <div id="image-container">
+            <img id="uploaded-image" src="" alt="Uploaded Image">
+            <div id="blue-square"></div>
+        </div>
+        <button id="crop-button">Crop</button>
+        <div id="resize-container">
+            <button id="add-size-button">Add Size</button>
+            <div id="size-input-holder"></div>
+            <button id="resize-button">Resize</button>
+        </div>
+    </div>
+    <div id="cropped-image-previews">
+        <div id="cropped-image-holder"></div>
+        <button id="download-button">Download</button>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
