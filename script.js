@@ -142,7 +142,7 @@ cropButton.addEventListener('click', () => {
 
     ctx.drawImage(uploadedImage, cropX, cropY, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
 
-    const croppedImageDataUrl = canvas.toDataURL('image/jpeg');
+    const croppedImageDataUrl = canvas.toDataURL('image/png');
 
     croppedImage.src = croppedImageDataUrl;
     blueSquare.style.display = 'none';
@@ -189,7 +189,7 @@ resizeButton.addEventListener('click', () => {
         canvas.width = size;
         canvas.height = size;
         ctx.drawImage(croppedImage, 0, 0, size, size);
-        const resizedImageDataUrl = canvas.toDataURL('image/jpeg');
+        const resizedImageDataUrl = canvas.toDataURL('image/png');
         const resizedImage = new Image();
         resizedImage.src = resizedImageDataUrl;
         resizedImage.alt = `Resized Image ${size}x${size}`;
@@ -227,7 +227,7 @@ downloadButton.addEventListener('click', async () => {
     const zip = new JSZip();
 
     res.forEach((blob, index) => {
-        zip.file(`image_${index + 1}.jpeg`, blob);
+        zip.file(`image_${index + 1}.png`, blob);
     });
 
     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -243,7 +243,7 @@ downloadButton.addEventListener('click', async () => {
     subTitleH2.style.display = 'block';
     subTitleP.style.display = 'block';
     dropZone.style.display = 'block';
-    croppedImage.parentElement.replaceChild(uploadedImage, croppedImage);
+        croppedImage.parentElement.replaceChild(uploadedImage, croppedImage);
 });
 
 function clearData() {
