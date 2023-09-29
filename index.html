@@ -18,10 +18,18 @@
         <p>Drag and drop an image here</p>
         <input type="file" id="file-input" accept="image/*" style="display: none;">
     </div>
+    <div id="loader-holder">
+        <span id="loader"></span>
+    </div>
     <div id="image-holder">
+        <p id="blue-square-text">Position the blue square over the portion of the image you wish to crop.</p>
         <div id="image-container">
             <img id="uploaded-image" src="" alt="Uploaded Image">
             <div id="blue-square"></div>
+        </div>
+        <div id="background-remover-checkbox-holder">
+            <label for="background-remover-checkbox">Remove Background</label>
+            <input id="background-remover-checkbox" type="checkbox" />
         </div>
         <button id="crop-button">Crop</button>
         <div id="resize-container">
@@ -33,6 +41,23 @@
     <div id="cropped-image-previews">
         <div id="cropped-image-holder"></div>
         <button id="download-button">Download</button>
+    </div>
+    <dialog id="variables-modal">
+        <label for="remover-endpoint">
+            Type in your endpoint: &nbsp;
+            <input id="remover-endpoint" type="text">
+        </label>
+        <label for="remover-api-key">
+            Type in your api access key: &nbsp;
+            <input id="remover-api-key" type="text">
+        </label>
+        <div id="modal-buttons">
+            <button id="modal-submit">Conferma</button>
+            <button id="modal-disable">Ignora</button>
+        </div>
+    </dialog>
+    <div id="open-modal-button">
+        <img src="images/credentialsIcon.png" alt="modal icon">
     </div>
 </body>
 <script src="script.js"></script>
