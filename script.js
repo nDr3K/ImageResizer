@@ -106,6 +106,10 @@ dropZone.addEventListener('drop', (e) => {
     handleFile(file);
 });
 
+dropZone.addEventListener('click', () => {
+    fileInput.click();
+});
+
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     handleFile(file);
